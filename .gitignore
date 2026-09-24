@@ -1,0 +1,13 @@
+target/
+uploads/
+*.log
+
+.env
+*.env.local
+firebase-*.json
+.m2repo.tgz
+
+.idea/
+*.iml
+.vscode/
+.DS_Store

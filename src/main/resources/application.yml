@@ -1,0 +1,93 @@
+spring:
+  application:
+    name: mutuals-backend
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/mutuals}
+    username: ${DB_USERNAME:mutuals}
+    password: ${DB_PASSWORD:mutuals}
+  jpa:
+    hibernate:
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: false
+  mail:
+    host: ${MAIL_HOST:localhost}
+    port: ${MAIL_PORT:1025}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:false}
+          starttls:
+            enable: ${MAIL_STARTTLS:false}
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+  jackson:
+    default-property-inclusion: non_null
+    time-zone: America/Lima
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-stacktrace: never
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+logging:
+  level:
+    com.mutuals: INFO
+
+mutuals:
+  zone: America/Lima
+  jwt:
+    secret: ${JWT_SECRET:change-me-please-this-is-a-dev-only-secret-of-64-characters!!}
+    access-token-minutes: ${JWT_ACCESS_MINUTES:15}
+    refresh-token-days: ${JWT_REFRESH_DAYS:30}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:8081}
+  streak:
+    max-active-streaks-free: ${MAX_ACTIVE_STREAKS_FREE:4}
+    manual-confirmation-hours: 24
+    gems-per-completed-week: 10
+    milestones: 7,30,100,365
+  proximity:
+    max-distance-meters: 100
+    max-time-diff-seconds: 120
+    location-ttl-minutes: 10
+    detection-distance-meters: 150
+  qr:
+    secret: ${QR_SECRET:change-me-dev-only-qr-secret-with-at-least-32-chars}
+    token-seconds: 30
+  shop:
+    shield-price-gems: 30
+  mail:
+    from: ${MAIL_FROM:Mutuals <no-reply@mutuals.app>}
+    frontend-url: ${FRONTEND_URL:http://localhost:5173}
+    enabled: ${MAIL_ENABLED:true}
+  push:
+    provider: ${PUSH_PROVIDER:log}
+    firebase-credentials-path: ${FIREBASE_CREDENTIALS_PATH:}
+  storage:
+    provider: ${STORAGE_PROVIDER:local}
+    local-dir: ${STORAGE_LOCAL_DIR:uploads}
+    s3-bucket: ${AWS_S3_BUCKET:}
+    s3-region: ${AWS_REGION:us-east-1}
+  seed:
+    admin-email: ${ADMIN_EMAIL:}
+    admin-password: ${ADMIN_PASSWORD:}

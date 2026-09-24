@@ -1,0 +1,5 @@
+package com.mutuals.activity.entity;
+
+public enum ActivityType {
+    STREAK_MILESTONE, PERSONAL_STREAK_MILESTONE, ACHIEVEMENT_UNLOCKED, RECORD_BROKEN, CHALLENGE_COMPLETED
+}

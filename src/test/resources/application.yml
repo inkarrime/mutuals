@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:mutuals;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+  mail:
+    host: localhost
+    port: 1025
+  main:
+    lazy-initialization: false
+
+mutuals:
+  zone: America/Lima
+  jwt:
+    secret: test-secret-test-secret-test-secret-test-secret-test-secret-123
+    access-token-minutes: 15
+    refresh-token-days: 30
+  cors:
+    allowed-origins: http://localhost:5173
+  streak:
+    max-active-streaks-free: 4
+    manual-confirmation-hours: 24
+    gems-per-completed-week: 10
+    milestones: 7,30,100,365
+  proximity:
+    max-distance-meters: 100
+    max-time-diff-seconds: 120
+    location-ttl-minutes: 10
+    detection-distance-meters: 150
+  qr:
+    secret: test-qr-secret-test-qr-secret-test-qr-secret
+    token-seconds: 30
+  shop:
+    shield-price-gems: 30
+  mail:
+    from: test@mutuals.app
+    frontend-url: http://localhost:5173
+    enabled: false
+  push:
+    provider: log
+    firebase-credentials-path:
+  storage:
+    provider: local
+    local-dir: target/test-uploads
+    s3-bucket:
+    s3-region: us-east-1
+  seed:
+    admin-email:
+    admin-password:
+  scheduling:
+    enabled: false
