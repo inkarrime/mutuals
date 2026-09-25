@@ -2,7 +2,7 @@
 
 CS2031 Desarrollo Basado en Plataformas · Mutuals
 Fecha límite: viernes 25 de septiembre de 2026, 11:59 p. m.
-Última actualización: 24 de septiembre de 2026
+Última actualización: 25 de septiembre de 2026
 
 Leyenda: ✅ Hecho · ⚠️ Parcial o por verificar · ❌ Pendiente
 
@@ -29,9 +29,9 @@ Leyenda: ✅ Hecho · ⚠️ Parcial o por verificar · ❌ Pendiente
 | 6.3 | Estructura de controladores | 0.5 | ✅ | Controllers delgados, `ResponseEntity`, `@Valid` |
 | 7.1 | Eventos | 1.0 | ✅ | 22 eventos con `@TransactionalEventListener` |
 | 7.2 | Procesamiento asíncrono | 0.5 | ✅ | `@Async` con `ThreadPoolTaskExecutor` en varios servicios |
-| 7.3 | Correo con plantillas | 0.5 | ⚠️ | 4 plantillas Thymeleaf; verificar la llegada en Mailpit (`localhost:8025`) |
-| 8 | Deployment en AWS | 2.0 | ❌ | EC2/ECS + RDS, security groups, variables de producción |
-| 9.1 | README y documentación | 0.4 | ❌ | Existe `docs/SETUP.md`; falta el README completo |
+| 7.3 | Correo con plantillas | 0.5 | ✅ | 4 plantillas Thymeleaf; bienvenida y recuperación verificadas en Mailpit |
+| 8 | Deployment en AWS | 2.0 | ⚠️ | Perfil `prod`, scripts y guía listos (`docs/DEPLOY_AWS.md`); falta crear EC2 + RDS en la cuenta AWS |
+| 9.1 | README y documentación | 0.4 | ✅ | Informe completo en `README.md`; falta pegar el link de AWS |
 | 9.2 | Control de versiones | 0.4 | ❌ | Faltan commits, ramas por feature, PRs con code review |
 | 9.3 | Gestión de proyecto | 0.2 | ❌ | Faltan GitHub Issues/Projects, milestones y labels |
 
@@ -40,7 +40,7 @@ Leyenda: ✅ Hecho · ⚠️ Parcial o por verificar · ❌ Pendiente
 | Entregable | Estado | Detalle |
 | --- | --- | --- |
 | Colección de Postman en la raíz (`postman_collection.json`) | ✅ | 115 requests con variables, auth, tests `pm.test` y ejemplos |
-| Informe en `README.md` (1000–2000 palabras) | ❌ | Portada, índice, introducción, problema, solución, entidades, errores, seguridad, eventos, GitHub, conclusión, apéndices |
+| Informe en `README.md` (1000–2000 palabras) | ✅ | Portada, índice, introducción, problema, solución, entidades, errores, seguridad, eventos, GitHub, conclusión, apéndices |
 
 ## Bonus
 
@@ -53,8 +53,8 @@ Leyenda: ✅ Hecho · ⚠️ Parcial o por verificar · ❌ Pendiente
 | CI/CD con GitHub Actions | ✅ | `.github/workflows/ci.yml`, corre al hacer push |
 | Logging con SLF4J | ✅ | Jobs, eventos y errores |
 | Upload de archivos a S3 | ⚠️ | `S3StorageService` listo; falta configurar el bucket |
-| Cobertura de tests mayor a 80% | ❌ | 13 tests (unitarios e integración) |
+| Cobertura de tests mayor a 80% | ❌ | 13 tests (unitarios e integración), 36.6% de líneas |
 
 ## Resumen
 
-Puntaje asegurado aproximado: 15.5 / 20. Pendientes con mayor impacto: deployment en AWS (2 pts), README (0.4), Git (0.4) y GitHub Projects (0.2).
+Pendientes: crear EC2 + RDS en AWS siguiendo `docs/DEPLOY_AWS.md` (2 pts) y poner el link en el README, integrar las ramas con pull requests revisados (0.4) y crear Issues, milestones y Project en GitHub (0.2).
