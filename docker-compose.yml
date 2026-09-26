@@ -33,7 +33,7 @@ services:
       MAIL_HOST: mail
       MAIL_PORT: 1025
     ports:
-      - "8080:8080"
+      - "${APP_PORT:-8080}:8080"
     profiles:
       - full
 
