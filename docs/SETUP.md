@@ -16,6 +16,20 @@
 
 Para levantar todo en contenedores (API incluida): `docker compose --profile full up --build`.
 
+## Prueba de punta a punta desde la terminal
+
+Con la API corriendo, `./scripts/smoke-test.sh` recorre el flujo completo (registro, login, errores, roles, mutuals,
+racha, interacción, notificaciones, refresh tokens y correos en Mailpit) y muestra ✔ o ✘ por cada paso.
+Requiere `curl` y `jq`.
+
+```bash
+docker compose --profile full up --build -d
+./scripts/smoke-test.sh
+```
+
+Si el puerto 8080 está ocupado, usa otro: `APP_PORT=8090 docker compose --profile full up --build -d` y luego
+`./scripts/smoke-test.sh http://localhost:8090`.
+
 ## Tests
 
 ```bash
