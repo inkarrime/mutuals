@@ -60,8 +60,7 @@ no distinguen entre amigos cercanos y contactos casuales.
 
 La calidad de las relaciones cercanas está asociada al bienestar y la salud mental, y la soledad en adultos jóvenes es un
 problema creciente. Un sistema que haga visible el estado de cada amistad y que exija la confirmación de ambos convierte
-la racha en una evidencia real de contacto y no en un número inflado. Además, limitar las rachas activas del plan gratuito
-a cuatro obliga a priorizar a las personas importantes.
+la racha en una evidencia real de contacto y no en un número inflado.
 
 ## 3. Descripción de la solución
 
@@ -116,6 +115,15 @@ El código está organizado **por dominio** (`auth`, `user`, `social`, `streak`,
 la lógica vive en servicios enfocados (`StreakProgressService`, `StreakTerminationService`, `StreakMaintenanceService`).
 Las dependencias se inyectan por constructor y `PushSender` y `StorageService` son interfaces cuya implementación se
 elige por configuración.
+
+### Decisiones de diseño
+
+- **Paquetes por dominio** para que cada funcionalidad sea autocontenida.
+- **Eventos después del commit** para desacoplar correo, push, logros y feed del núcleo de rachas.
+- **Pareja ordenada** (`userA` < `userB`) para que un mutual sea único sin importar quién siguió primero.
+- **Día calculado en America/Lima**, no en UTC, para que las rachas no se rompan de madrugada.
+- **HATEOAS considerado y descartado:** los clientes (web y móvil) conocen sus rutas y los enlaces duplicarían
+  información ya documentada en Swagger; se priorizó un JSON simple y paginado.
 
 ## 4. Modelo de entidades
 
@@ -245,7 +253,7 @@ códigos coherentes (400, 401, 403, 404, 409, 413, 500) y mantiene los controlad
 ### Prevención de vulnerabilidades
 
 - **Inyección SQL:** todo acceso a datos usa Spring Data JPA con consultas parametrizadas.
-- **XSS:** la API solo devuelve JSON; las plantillas de correo usan Thymeleaf, que escapa el contenido por defecto.
+- **XSS:** la API solo devuelve JSON y Thymeleaf escapa el contenido de los correos.
 - **CSRF:** desactivado de forma consciente porque la API es stateless y no usa cookies de sesión.
 - **CORS:** solo se aceptan los orígenes configurados en `CORS_ALLOWED_ORIGINS`.
 - **Subida de archivos:** se valida el tipo de imagen permitido, el tamaño máximo (5 MB) y que la ruta de destino no salga de la carpeta de uploads.
@@ -348,16 +356,14 @@ repositorio y se activa el perfil `prod`. La guía paso a paso está en [`docs/D
 
 ### Logros del proyecto
 
-Construimos un backend completo que convierte la racha en una prueba real de contacto: nadie puede sumar días sin la
-confirmación de su amigo, ya sea manual, por QR o por proximidad. El sistema avisa antes de que una racha se pierda,
-premia la constancia y ofrece a los administradores herramientas de moderación, todo con autenticación robusta,
-errores uniformes, procesamiento asíncrono y despliegue en la nube.
+Construimos un backend completo que convierte la racha en una prueba real de contacto: nadie suma días sin la
+confirmación de su amigo, ya sea manual, por QR o por proximidad. El sistema avisa antes de que una racha se pierda y
+premia la constancia, con autenticación robusta, errores uniformes y procesamiento asíncrono.
 
 ### Aprendizajes clave
 
 - Diseñar eventos transaccionales para que los efectos secundarios ocurran solo después del commit.
 - Separar responsabilidades en servicios pequeños facilitó probar la lógica de rachas de forma aislada.
-- Las zonas horarias importan: calcular "un día" en America/Lima y no en UTC evitó rachas rotas por error.
 - Configurar la infraestructura (Docker, RDS, security groups) es tan importante como el código.
 
 ### Trabajo futuro
